@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Wasm Form</title>
+  <script src="wasm_exec.js"></script>
+</head>
+<body>
+  <div id="form-container"></div>
+  <script>
+    const go = new Go();
+    WebAssembly.instantiateStreaming(fetch('main.wasm'), go.importObject).then((result) => {
+      go.run(result.instance);
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html>
+

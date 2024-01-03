@@ -1,0 +1,69 @@
+package main
+
+import (
+	"github.com/hexops/vecty"
+	"github.com/hexops/vecty/elem"
+	"github.com/hexops/vecty/prop"
+	"github.com/hexops/vecty/style"
+)
+
+func main() {
+	vecty.SetTitle("Vecty Form")
+	vecty.AddStylesheet("dist/css/bulma.min.css")	
+	//flowbite from cdn(Util CSSはVectyでは使用不可)
+	//vecty.AddStylesheet("https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css")	
+	//materialize (no uses ださい)
+	//vecty.AddStylesheet("dist/css/materialize.min.css")	
+	vecty.RenderBody(&PageView{})
+}
+
+// PageView is our main page component.
+type PageView struct {
+	vecty.Core
+}
+
+// Render implements the vecty.Component interface.
+func (p *PageView) Render() vecty.ComponentOrHTML {
+	return elem.Body(
+		//Form Control
+		elem.Form(
+			vecty.Markup(
+				style.Margin(style.Px(0)),
+				//vecty.Class("max-w-sm mx-auto "),
+			),
+			elem.Div(
+				vecty.Markup(vecty.Class("field"),),
+				elem.Label(
+					vecty.Markup(vecty.Class("label"),),
+					vecty.Text("Username"),
+				),
+				elem.Div(
+					vecty.Markup(vecty.Class("control"),),
+					elem.Input(
+						vecty.Markup(
+							vecty.Class("input"),
+							prop.Type(prop.TypeText),
+						),
+					),
+				),
+			),
+			elem.Div(
+				vecty.Markup(vecty.Class("field is-grouped"),),
+				elem.Div(
+					vecty.Markup(vecty.Class("control"),),	
+					elem.Button(
+						vecty.Markup(vecty.Class("button is-link"),),	
+						vecty.Text("submit"),
+					),
+				),
+				elem.Div(
+					vecty.Markup(vecty.Class("control"),),	
+					elem.Button(
+						vecty.Markup(vecty.Class("button is-link is-light"),),	
+						vecty.Text("cancel"),
+					),
+				),
+			),
+		),	
+	)
+}

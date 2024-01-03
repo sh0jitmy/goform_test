@@ -1,0 +1,57 @@
+package main
+
+import (
+	"github.com/hexops/vecty"
+	"github.com/hexops/vecty/elem"
+	"github.com/hexops/vecty/prop"
+	"github.com/hexops/vecty/style"
+)
+
+func main() {
+	vecty.SetTitle("Vecty Form")
+	vecty.AddStylesheet("dst/css/bulma.min.css")	
+	//flowbite from cdn(Util CSSはVectyでは使用不可)
+	//vecty.AddStylesheet("https://cdnjs.cloudflare.com/ajax/libs/flowbite/2.2.1/flowbite.min.css")	
+	//materialize (no uses ださい)
+	//vecty.AddStylesheet("dist/css/materialize.min.css")	
+	vecty.RenderBody(&PageView{})
+}
+
+// PageView is our main page component.
+type PageView struct {
+	vecty.Core
+}
+
+// Render implements the vecty.Component interface.
+func (p *PageView) Render() vecty.ComponentOrHTML {
+	return elem.Body(
+		//Form Control
+		elem.Form(
+			vecty.Markup(
+				style.Margin(style.Px(0)),
+				//vecty.Class("max-w-sm mx-auto "),
+			),
+			elem.Div(
+				vecty.Markup(
+					vecty.Class("mb-5"),
+				),
+				elem.Label(
+					vecty.Markup(
+						vecty.Class("block mb-2 text-sm font-medium text-gray-900 dark:text-white"),
+					),
+					vecty.Text("Username"),
+				),
+				elem.Input(
+					vecty.Markup(
+						//vecty.Class("bg-gray-50 border border-gray-300 text-gray-900 test-sm rounded-lg dark:text-white"),
+						prop.Type(prop.TypeText),
+					),
+				),
+			),
+			elem.Button(
+				vecty.Text("submit"),
+
+			),	
+		),	
+	)
+}
